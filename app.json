@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "WhoCares",
+    "slug": "WhoCaresApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/myIcons/medium512.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/myIcons/medium512.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/myIcons/medium512.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.wca.myapp",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a5d06d82-f2d7-466a-ac6d-e350fb6f36ee"
+      }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
+  }
+}
