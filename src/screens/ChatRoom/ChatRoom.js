@@ -34,7 +34,7 @@ dayjs.extend(relativeTime);
 
 import { FlashList } from "@shopify/flash-list";
 
-const ChatRoom = () => {
+const ChatRoom = ({ otherUser, chatRoomId }) => {
   const route = useRoute();
   const navigation = useNavigation();
   const [chatRoom, setChatRoom] = useState(null);
@@ -52,8 +52,8 @@ const ChatRoom = () => {
   const { width, height } = useWindowDimensions();
   const [otherUserOnline, setOtherUserOnline] = useState(false);
 
-  const otherUser = route.params?.user;
-  const chatRoomId = route.params?.id;
+  // const otherUser = route.params?.user;
+  // const chatRoomId = route.params?.id;
 
   //chat room info
   useEffect(() => {
@@ -222,6 +222,7 @@ const ChatRoom = () => {
   }, [otherUser.name]);
 
   if (!chatRoom) {
+    console.table({ otherUser, chatRoomId });
     return (
       <View style={styles.root}>
         <ActivityIndicator />
@@ -244,8 +245,16 @@ const ChatRoom = () => {
 
   return (
     <View style={styles.root}>
+      <View style={styles.header}>
+        <CustomHeader
+          getTypingMessage={getTypingMessage}
+          image={otherUser?.image}
+          oUser={otherUser}
+        />
+      </View>
       <View style={styles.list}>
         <FlashList
+          showsVerticalScrollIndicator={false}
           data={messages}
           // extraData={messages}
           renderItem={renderItem}
@@ -270,6 +279,7 @@ const ChatRoom = () => {
           />
         </View>
       )} */}
+
       <View style={{ paddingTop: 10 }}>
         <ChatInput
           // ref={chatInput}
@@ -292,6 +302,9 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     paddingHorizontal: 10,
+  },
+  header: {
+    marginBottom: 10,
   },
 });
 

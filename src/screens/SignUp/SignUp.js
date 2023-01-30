@@ -95,93 +95,94 @@ const SignUp = () => {
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   return (
-    <ScrollView
-      style={{ backgroundColor: myColors.pbgc }}
-      showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Create an account</Text>
-        <View style={styles.container}>
-          <CustomInput
-            name="name"
-            placeholder="Name"
-            control={control}
-            rules={{
-              required: "Name is required",
-              minLength: {
-                value: 3,
-                message: "Name must be at least 3 characters",
-              },
-              maxLength: {
-                value: 15,
-                message: "Name must be at most 15 characters",
-              },
-            }}
-          />
-          <CustomInput
-            name="email"
-            placeholder="Email"
-            control={control}
-            rules={{
-              required: "Email is required",
-              pattern: { value: EMAIL_REGEX, message: "Invalid email address" },
-            }}
-          />
-          <CustomInput
-            name="password"
-            placeholder="Password"
-            control={control}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
-            }}
-            secure={true}
-          />
-          <CustomInput
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            control={control}
-            rules={{
-              required: "Passwords do not match",
-              validate: (value) => value === pwd || "Passwords do not match",
-            }}
-            secure={true}
-          />
-          <CustomButton
-            onPress={handleSubmit(onRegisterPressed)}
-            text={loading ? "Loading..." : "Register"}
-          />
-          <Text style={styles.text}>
-            By registering, you confirm that you accept our{" "}
-            <Text style={{ color: "white" }} onPress={onTermsPressed}>
-              Terms of use
-            </Text>{" "}
-            and{" "}
-            <Text style={{ color: "white" }} onPress={onPrivacyPressed}>
-              Privacy Policy
-            </Text>
+    <View style={styles.root}>
+      <Text style={styles.title}>Create an account</Text>
+      <View style={styles.container}>
+        <CustomInput
+          name="name"
+          placeholder="Name"
+          control={control}
+          rules={{
+            required: "Name is required",
+            minLength: {
+              value: 3,
+              message: "Name must be at least 3 characters",
+            },
+            maxLength: {
+              value: 15,
+              message: "Name must be at most 15 characters",
+            },
+          }}
+        />
+        <CustomInput
+          name="email"
+          placeholder="Email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: { value: EMAIL_REGEX, message: "Invalid email address" },
+          }}
+        />
+        <CustomInput
+          name="password"
+          placeholder="Password"
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+          }}
+          secure={true}
+        />
+        <CustomInput
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          control={control}
+          rules={{
+            required: "Passwords do not match",
+            validate: (value) => value === pwd || "Passwords do not match",
+          }}
+          secure={true}
+        />
+        <CustomButton
+          onPress={handleSubmit(onRegisterPressed)}
+          text={loading ? "Loading..." : "Register"}
+        />
+        <Text style={styles.text}>
+          By registering, you confirm that you accept our{" "}
+          <Text style={{ color: "white" }} onPress={onTermsPressed}>
+            Terms of use
+          </Text>{" "}
+          and{" "}
+          <Text style={{ color: "white" }} onPress={onPrivacyPressed}>
+            Privacy Policy
           </Text>
-        </View>
-        <SocialSignInButtons />
-        <Text style={styles.link} onPress={onSignInPressed}>
-          Already have an account?{" "}
-          <Text style={{ color: myColors.primaryBtn }}>Sign In</Text>
         </Text>
       </View>
-    </ScrollView>
+      <View style={{ maxWidth: 400, width: "100%" }}>
+        <SocialSignInButtons />
+      </View>
+
+      <Text style={styles.link} onPress={onSignInPressed}>
+        Already have an account?{" "}
+        <Text style={{ color: myColors.primaryBtn }}>Sign In</Text>
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    // flex: 1,
+    // height: "auto",
     backgroundColor: myColors.pbgc,
     alignItems: "center",
     padding: 20,
   },
   container: {
+    maxWidth: 400,
     width: "100%",
     borderColor: "white",
     borderWidth: 1,

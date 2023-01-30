@@ -6,6 +6,7 @@ import {
   FlatList,
   RefreshControl,
   AppState,
+  useWindowDimensions,
 } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import ChatListItem from "../../components/ChatListItem";
@@ -21,10 +22,13 @@ import { supabase } from "../../initSupabase";
 import * as Notifications from "expo-notifications";
 
 import { addUserPushToken } from "../../../supabaseQueries";
+import Search from "../Search";
+import ChatRoom from "../ChatRoom";
 // import { Linking } from "react-native";
 // import * as Linking from "expo-linking";
 
 const Home = () => {
+  const { width, height } = useWindowDimensions();
   const [expoPushToken, setExpoPushToken] = useState("");
   useEffect(() => {
     const subscription = Notifications.addPushTokenListener(addUserPushToken);
@@ -66,6 +70,10 @@ const Home = () => {
   }, []);
 
   const navigation = useNavigation();
+  // const [chatRoomId, setChatRoomId] = useState(null);
+  // const [otherUser, setOtherUser] = useState(null);
+  const [selectedChatRoom, setSelectedChatRoom] = useState(null);
+
   const [chatRooms, setChatRooms] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [rerender, setRerender] = React.useState(false);
@@ -163,30 +171,83 @@ const Home = () => {
   }
 
   return (
-    // <ScrollView style={{ flex: 1, height: "100%" }}>
-    //<ScrollView showsVerticalScrollIndicator={false}>
-    <View style={styles.root}>
-      <FlatList
-        data={chatRooms}
-        extraData={rerender}
-        renderItem={({ item }) => <ChatListItem chat={item} />}
-        onRefresh={fetchChatRooms}
-        refreshing={loading}
-      />
+    // // <ScrollView style={{ flex: 1, height: "100%" }}>
+    // //<ScrollView showsVerticalScrollIndicator={false}>
+    // <View style={styles.root}>
+    //   <FlatList
+    //     data={chatRooms}
+    //     extraData={rerender}
+    //     renderItem={({ item }) => <ChatListItem chat={item} />}
+    //     onRefresh={fetchChatRooms}
+    //     refreshing={loading}
+    //   />
+    // </View>
+    // //</ScrollView>
+    // // </ScrollView>
+    <View style={[styles.root, { minHeight: height - 1 }]}>
+      <View
+        style={[
+          styles.homeleft,
+          {
+            width: width * 0.3,
+            height: height - 15,
+          },
+        ]}>
+        <HomeHeader />
+
+        <FlatList
+          data={chatRooms}
+          extraData={rerender}
+          renderItem={({ item }) => (
+            <ChatListItem
+              chat={item}
+              onPress={(otherUser, chatRoomId) =>
+                setSelectedChatRoom({ otherUser, chatRoomId })
+              }
+            />
+          )}
+          onRefresh={fetchChatRooms}
+          refreshing={loading}
+        />
+      </View>
+
+      {selectedChatRoom ? (
+        <View
+          style={[
+            styles.chatRoom,
+            { width: width * 0.7 - 30, height: height - 15 },
+          ]}>
+          <ChatRoom
+            otherUser={selectedChatRoom.otherUser}
+            chatRoomId={selectedChatRoom.chatRoomId}
+          />
+        </View>
+      ) : (
+        <View
+          style={[
+            styles.noChatRoom,
+            {
+              width: width * 0.7 - 30,
+              height: height - 15,
+            },
+          ]}>
+          <Text style={styles.noChat}>
+            Open a chat room and start a conversation !
+          </Text>
+        </View>
+      )}
     </View>
-    //</ScrollView>
-    // </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    flexDirection: "row",
     backgroundColor: myColors.pbgc,
     paddingVertical: 5,
-
     justifyContent: "center",
-    // alignItems: "center",
+    alignItems: "center",
+    paddingHorizontal: 15,
   },
   emptyChats: {
     flex: 1,
@@ -194,6 +255,31 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  noChat: {
+    color: "white",
+    fontSize: 20,
+    textAlign: "center",
+  },
+  homeleft: {
+    // borderColor: "white",
+    // borderWidth: 1,
+    height: "100%",
+  },
+  homeleftHeader: {
+    height: 50,
+  },
+  noChatRoom: {
+    // borderColor: "white",
+    // borderWidth: 1,
+    height: "100%",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  chatRoom: {
+    // borderColor: "white",
+    // borderWidth: 1,
+    height: "100%",
   },
 });
 

@@ -132,14 +132,18 @@ const CustomHeader = ({ image, oUser, getTypingMessage }) => {
   }, [chatRoom]);
 
   return (
-    <>
-      <>
-        <AntDesign
+    <View style={{ flexDirection: "row" }}>
+      <View
+        style={{
+          flexDirection: "row",
+        }}>
+        {/* <AntDesign
           onPress={navigation.goBack}
           name="arrowleft"
           size={24}
           color="white"
-        />
+          style={{ alignSelf: "center" }}
+        /> */}
         <Image
           source={{ uri: image }}
           style={{
@@ -150,7 +154,7 @@ const CustomHeader = ({ image, oUser, getTypingMessage }) => {
             marginRight: 15,
           }}
         />
-      </>
+      </View>
       <View style={styles.root}>
         <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
           {otherUser.name}
@@ -175,7 +179,7 @@ const CustomHeader = ({ image, oUser, getTypingMessage }) => {
           )
         )}
       </View>
-    </>
+    </View>
   );
 };
 
@@ -184,6 +188,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     // alignItems: "center",
     // padding: 10,
+    // paddingRight: 10,
   },
   online: {
     color: myColors.PrimaryMessage,

@@ -79,7 +79,7 @@ const SignIn = () => {
   const [Password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
   return (
-    <View style={[styles.root, { height: height * 0.2 }]}>
+    <View style={styles.root}>
       <Text style={styles.logoText}>WhoCares!</Text>
       <View style={styles.container}>
         <CustomInput
@@ -110,21 +110,26 @@ const SignIn = () => {
           Forgot Password ?
         </Text>
       </View>
-      <SocialSignInButtons />
-      <Text style={styles.forgot} onPress={onSingUpPressed}>
-        Don't have an account?{" "}
-        <Text style={{ color: myColors.primaryBtn }}>Sign Up</Text>
-      </Text>
+      <View style={styles.social}>
+        <SocialSignInButtons />
+      </View>
+      <View style={styles.signup}>
+        <Text style={styles.forgot} onPress={onSingUpPressed}>
+          Don't have an account?{" "}
+          <Text style={{ color: myColors.primaryBtn }}>Sign Up</Text>
+        </Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: myColors.pbgc,
     alignItems: "center",
     padding: 20,
+    // minHeight: 700,
   },
   logo: {
     width: "100%",
@@ -138,6 +143,7 @@ const styles = StyleSheet.create({
     // fontWeight: "bold",
   },
   container: {
+    maxWidth: 400,
     width: "100%",
     borderColor: "white",
     borderWidth: 1,
@@ -156,6 +162,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     // textDecorationLine: "underline",
     // textDecorationColor: "white",
+  },
+  social: {
+    width: "100%",
+    maxWidth: 400,
+  },
+  signup: {
+    backgroundColor: myColors.pbgc,
+    width: "100%",
+    maxWidth: 400,
   },
 });
 

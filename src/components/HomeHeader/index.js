@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -13,23 +13,51 @@ const HomeHeader = () => {
     navigation.navigate("Search");
   };
   return (
-    <>
-      <AntDesign
-        onPress={onSearchPressed}
-        name="search1"
-        size={24}
-        color="white"
-        style={{ marginRight: 20 }}
-      />
-      <AntDesign
-        onPress={onSettingsPressed}
-        name="setting"
-        size={24}
-        color="white"
-        style={{}}
-      />
-    </>
+    <View style={styles.root}>
+      <View style={styles.left}>
+        <Text style={styles.title}>Chats</Text>
+      </View>
+      <View style={styles.right}>
+        <AntDesign
+          onPress={onSearchPressed}
+          name="search1"
+          size={24}
+          color="white"
+          style={{ marginRight: 20 }}
+        />
+        <AntDesign
+          onPress={onSettingsPressed}
+          name="setting"
+          size={24}
+          color="white"
+          style={{}}
+        />
+      </View>
+    </View>
   );
 };
+const styles = StyleSheet.create({
+  root: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    // backgroundColor: "#3777f0",
+    paddingVertical: 10,
+    
+  },
+  left: {
+    paddingHorizontal: 20,
+  },
 
+  title: {
+    color: "white",
+    // fontWeight: "bold",
+    fontSize: 20,
+  },
+  right: {
+    marginLeft: "auto",
+    flexDirection: "row",
+    paddingHorizontal: 20,
+  },
+});
 export default HomeHeader;

@@ -2,6 +2,7 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import React from "react";
 import { myColors } from "../../../colors";
 import { Controller } from "react-hook-form";
+import { Platform } from "expo-modules-core";
 
 const CustomInput = ({
   control,
@@ -22,6 +23,7 @@ const CustomInput = ({
         <>
           <View style={[styles.container, error ? styles.container_error : {}]}>
             <TextInput
+              
               autoFocus={autoFocus}
               style={styles.text}
               onBlur={onBlur}
@@ -49,9 +51,15 @@ const styles = StyleSheet.create({
     backgroundColor: myColors.inputBox,
     width: "100%",
     height: 50,
+    alignContent: "center",
+    justifyContent: "center",
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginVertical: 5,
+
+    // paddingVertical: 20,
+    // paddingHorizontal: 20,
+    // marginVertical: 5,
     marginBottom: 10,
     borderRadius: 5,
   },
@@ -63,6 +71,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     color: myColors.inputBoxText,
+    borderColor: myColors.inputBox,
     // fontFamily: "Rubik_400Regular",
   },
 });

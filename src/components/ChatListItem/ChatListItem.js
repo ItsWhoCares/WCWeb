@@ -98,15 +98,25 @@ const ChatListItem = ({ chat, onPress }) => {
       style={({ pressed }) =>
         pressed ? [styles.containerPressed] : styles.container
       }
-      onPress={() =>
-        navigation.navigate("ChatRoom", {
-          id: chatRoom?.ChatRoom?.id,
-          user: {
-            id: otherUser.id,
-            name: otherUser.name,
-            image: otherUser.image,
-          },
-        })
+      onPress={
+        // () =>
+        // navigation.navigate("ChatRoom", {
+        //   id: chatRoom?.ChatRoom?.id,
+        //   user: {
+        //     id: otherUser.id,
+        //     name: otherUser.name,
+        //     image: otherUser.image,
+        //   },
+        // })
+        () =>
+          onPress(
+            {
+              id: otherUser.id,
+              name: otherUser.name,
+              image: otherUser.image,
+            },
+            chatRoom?.ChatRoom?.id
+          )
       }>
       <Image style={styles.image} source={{ uri: otherUser?.image }} />
       <View style={styles.content}>

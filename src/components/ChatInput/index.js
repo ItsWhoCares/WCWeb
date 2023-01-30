@@ -6,6 +6,7 @@ import {
   Alert,
   Text,
   Pressable,
+  Platform,
 } from "react-native";
 import { myColors } from "../../../colors";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
@@ -94,6 +95,7 @@ const ChatInput = ({
   // };
   // const [image, setImage] = useState(null);
   const handleImagePick = async () => {
+    if (Platform.OS === "web") return;
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -197,6 +199,12 @@ const styles = StyleSheet.create({
     marginRight: 8,
     borderRadius: 20,
     color: "white",
+    alignContent: "center",
+    justifyContent: "center",
+    // paddingVertical: 20,
+    paddingTop: 10,
+    // alignSelf: "center",
+    // textAlignVertical: "center",
   },
   button: {
     width: 80,

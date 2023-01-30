@@ -18,7 +18,14 @@ const App = () => {
   }, []);
   NavigationBar.setBackgroundColorAsync("black");
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView
+      style={{
+        //flex: 1,
+        backgroundColor: "red",
+        alignContent: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+      }}>
       <SafeAreaView style={styles.root}>
         <StatusBar barStyle={"light-content"} backgroundColor={"black"} />
         <Navigation />
@@ -29,7 +36,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    // flex: 1,
+    // maxWidth: 400,
+    width: "100%",
+    // height: "100%",
     // marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: myColors.pbgc,
   },
